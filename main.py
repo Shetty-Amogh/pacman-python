@@ -1,12 +1,31 @@
 import os
 
+#ᗧ pacman, ᗣ ghost
+
 #------------------- variables-----------------------
 
-map = [["P","-","-","-"],["-","-","-","-"],["-","-","-","-"],["-","-","-","-"]]
+map = [
+["__","__","__","__","__","__","__","__","__","__","__","__","__","__","__","__"],
+["| ","ᗧ ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["| ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","- ","| "],
+["__","__","__","__","__","__","__","__","__","__","__","__","__","__","__","__"]
+]
 
-coordX=0
-coordY=0
-R = 4
+coordX=1
+coordY=1
+R = 16
 
 gameOn = True
 
@@ -16,7 +35,7 @@ def printMap():
  os.system("clear")
  for y in range(R): 
   for x in range(R):
-   print(map[x][y], end=' ')
+   print(map[y][x], end=' ')
   else:
    print(" ")
  else:
@@ -32,45 +51,53 @@ while gameOn == True:
  print("Make your move :", end=" ")
  move = input()
 
-#-------------------- move down -----------------------
+#-------------------- move right -----------------------
  
- if move == 's' or move == 'S':
-  temp = map[coordX][coordY + 1] 
-  map[coordX][coordY + 1] = map[coordX][coordY]
-  map[coordX][coordY] = temp
-  coordY = coordY + 1
-  printMap()
-  
-#-------------------move up----------------------------
- 
- elif move == 'w' or move == 'W':
-  
-   temp = map[coordX][coordY-1]
-   map[coordX][coordY-1]= map[coordX][coordY]
-   map[coordX][coordY] = temp
-   coordY = coordY - 1
+ if move == 'd' or move == 'D':
+  if map[coordY][coordX + 1] == "| " or map[coordY][coordX + 1] == "__":
+    printMap()
+  else: 
+   temp = map[coordY][coordX + 1] 
+   map[coordY][coordX + 1] = map[coordY][coordX]
+   map[coordY][coordX] = temp
+   coordX = coordX + 1
    printMap()
-  
-
 #-------------------move left----------------------------
  
  elif move == 'a' or move == 'A':
-  temp = map[coordX-1][coordY]
-  map[coordX-1][coordY]= map[coordX][coordY]
-  map[coordX][coordY] = temp
-  coordX = coordX - 1
-  printMap()
+  if map[coordY][coordX - 1] == "| " or map[coordY][coordX - 1] == "__":
+    printMap(); 
+  else: 
+   temp = map[coordY][coordX-1]
+   map[coordY][coordX-1]= map[coordY][coordX]
+   map[coordY][coordX] = temp
+   coordX = coordX - 1
+   printMap()
 
+#-------------------move up----------------------------
+ 
+ elif move == 'w' or move == 'W':
+  if map[coordY-1][coordX] == "| " or map[coordY-1][coordX] == "__":
+   printMap()
+  else: 
+   temp = map[coordY-1][coordX]
+   map[coordY-1][coordX]= map[coordY][coordX]
+   map[coordY][coordX] = temp
+   coordY = coordY - 1
+   printMap() 
  
 
-#-------------------move right----------------------------
+#-------------------move down----------------------------
  
- elif move == 'd' or move == 'D':
-  temp = map[coordX+1][coordY]
-  map[coordX+1][coordY]= map[coordX][coordY]
-  map[coordX][coordY] = temp
-  coordX = coordX + 1
-  printMap()
+ elif move == 's' or move == 'S':
+  if map[coordY+1][coordX] == "| " or map[coordY+1][coordX] == "__":
+   printMap()
+  else: 
+   temp = map[coordY+1][coordX]
+   map[coordY+1][coordX]= map[coordY][coordX]
+   map[coordY][coordX] = temp
+   coordY = coordY + 1
+   printMap()
 
 
 #--------------------exit-------------------------------
